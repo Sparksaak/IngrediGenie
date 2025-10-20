@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IngrediGenie</title>
+  <!-- Link to the external stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W24BEJF79Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W24BEJF79Y');
+</script>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <!-- Logo/Home Link -->
+      <a href="{{ url_for('home') }}" class="navbar-brand">IngrediGenie</a>
+      <!-- Navigation Links -->
+      <div class="nav-links">
+        <a href="" class="nav-link">Home</a>
+        <a href="#mission" class="nav-link">Mission</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#impact" class="nav-link">Impact</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="{{ url_for('get_started') }}" class="nav-link">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Home Page Content -->
+  <div class="page-wrapper">
+    <!-- Hero Section -->
+    <section id="home" class="content-section hero-section fade-in-up">
+      <div class="section-content-wrapper">
+        <header class="text-center mb-12">
+          <h1 class="header-title">
+            IngrediGenie
+          </h1>
+          <p class="header-subtitle">
+            Don't toss it, transform it!
+          </p>
+          <!-- Call to action button to navigate to the recipe page -->
+          <a href="{{ url_for('get_started') }}" class="btn-hero">
+            Get Started Now!
+          </a>
+        </header>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="content-section fade-in-up">
+      <div class="section-content-wrapper">
+        <h2 class="section-heading">Our Mission</h2>
+        <p class="text-gray-700 leading-relaxed text-lg my-4">
+          Every year, an astonishing amount of perfectly good food goes to waste. From forgotten vegetables in the
+          fridge to pantry staples nearing their expiry, food waste is a global challenge with environmental, economic,
+          and social impacts. IngrediGenie is here to change that, empowering you to make the most of every
+          ingredient.
+        </p>
+        <p class="text-gray-700 leading-relaxed text-lg mt-4">
+          Our platform helps you discover creative and delicious recipes based on what you already have, reducing waste
+          and saving you money. It's simple, sustainable, and satisfying!
+        </p>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="content-section how-it-works-section fade-in-up">
+      <div class="section-content-wrapper">
+        <h2 class="section-heading">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center my-8">
+          <div class="how-it-works-item">
+            <h3 class="text-xl font-semibold text-orange-700 mb-2">1. Input Ingredients</h3>
+            <p class="text-gray-700">Tell us what you have on hand – be it a few forgotten veggies or a full pantry
+              list.</p>
+          </div>
+          <div class="how-it-works-item">
+            <h3 class="text-xl font-semibold text-orange-700 mb-2">2. Get Recipes</h3>
+            <p class="text-gray-700">Our smart system generates unique and tasty recipes tailored to your ingredients.
+            </p>
+          </div>
+          <div class="how-it-works-item">
+            <h3 class="text-xl font-semibold text-orange-700 mb-2">3. Cook & Enjoy!</h3>
+            <p class="text-gray-700">Whip up a meal, reduce waste, and savor your culinary creations!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="content-section fade-in-up">
+      <div class="section-content-wrapper">
+        <h2 class="section-heading">Our Impact</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center my-8">
+          <div class="impact-card">
+            <h3 class="text-xl font-semibold text-orange-700 mb-2">Reduced Landfill Waste</h3>
+            <p class="text-gray-700">Less food in bins means fewer greenhouse gas emissions from decomposing organic
+              matter.</p>
+          </div>
+          <div class="impact-card">
+            <h3 class="text-xl font-semibold text-orange-700 mb-2">Financial Savings</h3>
+            <p class="text-gray-700">Families save money by maximizing their grocery purchases and reducing unnecessary
+              spending.
+            </p>
+          </div>
+          <div class="impact-card">
+            <h3 class="text-xl font-semibold text-orange-700 mb-2">Resource Conservation</h3>
+            <p class="text-gray-700">Every meal made from existing ingredients saves the water, energy, and land
+              resources used to produce new food.</p>
+          </div>
+          <div class="impact-card">
+            <h3 class="text-xl font-semibold text-orange-700 mb-2">Mindful Consumption</h3>
+            <p class="text-gray-700">Encouraging a greater awareness of food value and promoting responsible eating
+              habits.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="content-section testimonials-section fade-in-up">
+      <div class="section-content-wrapper">
+        <h2 class="section-heading">What Our Users Say</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+          <div class="testimonial-card">
+            <p class="italic mb-3">"IngrediGenie has completely changed how I cook! I used to throw away so much, but
+              now I'm always finding new ways to use up everything. Highly recommend!"</p>
+            <p class="font-semibold text-red-700">- Sarah L., Eco-conscious Cook</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="italic mb-3">"This website is a lifesaver! I save money on groceries and feel great about reducing
+              my environmental footprint. The recipes are surprisingly creative and easy to follow."</p>
+            <p class="font-semibold text-red-700">- Mark T., Budget-savvy Parent</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="italic mb-3">"I never thought I could be so creative with leftovers! IngrediGenie makes meal
+              planning fun and sustainable. It's my go-to for recipe inspiration."</p>
+            <p class="font-semibold text-red-700">- Emily R., Culinary Explorer</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="italic mb-3">"Simple, effective, and genuinely helpful. This platform is a brilliant solution to a
+              common problem. My fridge has never looked so empty (in a good way!)."</p>
+            <p class="font-semibold text-red-700">- David S., Busy Professional</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="content-section fade-in-up">
+      <div class="section-content-wrapper">
+        <h2 class="section-heading">Frequently Asked Questions</h2>
+        <div class="faq-container my-8">
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3 class="font-semibold">What kind of recipes can I expect?</h3>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p class="leading-relaxed">
+                You can expect a wide variety of recipes, from simple weeknight dinners to more adventurous culinary
+                creations. Our system is designed to be flexible and creative, offering suggestions that make the most
+                of your specific ingredients.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3 class="font-semibold">Do I need an account to use IngrediGenie?</h3>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p class="leading-relaxed">
+                No, you don't! You can start generating recipes immediately without creating an account. We believe in
+                making sustainable cooking accessible to everyone.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3 class="font-semibold">Is it free to use?</h3>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p class="leading-relaxed">
+                Yes, IngrediGenie is completely free to use. Our mission is to reduce food waste, and we want to make
+                our tools available to as many people as possible.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              <h3 class="font-semibold">How accurate are the recipes generated?</h3>
+              <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+              <p class="leading-relaxed">
+                Our recipes are generated using advanced algorithms to provide relevant and practical suggestions based
+                on your ingredients. While we strive for accuracy, always use your best judgment when cooking and adjust
+                to your taste!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Removed: Bottom Call to Action Section -->
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>&copy; 2025 IngrediGenie. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Intersection Observer for scroll animations
+      const sectionsToAnimate = document.querySelectorAll('.page-wrapper .content-section');
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      sectionsToAnimate.forEach(section => {
+        section.classList.add('fade-in-up');
+        observer.observe(section);
+      });
+
+      // FAQ Dropdown Functionality
+      const faqQuestions = document.querySelectorAll('.faq-question');
+
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+          const faqItem = question.closest('.faq-item');
+          const faqAnswer = faqItem.querySelector('.faq-answer');
+          const faqIcon = question.querySelector('.faq-icon');
+
+          // Toggle the 'active' class on the faq-item
+          faqItem.classList.toggle('active');
+
+          // Toggle the display of the answer
+          if (faqItem.classList.contains('active')) {
+            faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
+            faqIcon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+          } else {
+            faqAnswer.style.maxHeight = "0";
+            faqIcon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
