@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IngrediGenie</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W24BEJF79Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W24BEJF79Y');
+</script>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo/Home Link -->
+            <a href="{{ url_for('home') }}" class="navbar-brand">IngrediGenie</a>
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('home') }}#mission" class="nav-link">Mission</a>
+                <a href="{{ url_for('home') }}#how-it-works" class="nav-link">How It Works</a>
+                <a href="{{ url_for('home') }}#impact" class="nav-link">Impact</a>
+                <a href="{{ url_for('home') }}#testimonials" class="nav-link">Testimonials</a>
+                <a href="{{ url_for('home') }}#faq" class="nav-link">FAQ</a>
+                <a href="" class="nav-link">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-wrapper">
+        <section id="get-started" class="content-section fade-in-up">
+            <h2 class="section-heading">Ready to Start Cooking?</h2>
+            <p>Enter your ingredients and any special requests below to get a recipe tailored just for you!</p>
+            <!-- The modern-form-card is now a direct child of the content-section -->
+            <!-- The content-section has flex properties to center its children -->
+            <div class="modern-form-card text-left">
+                <form id="recipe-form" class="mt-8 w-full">
+                    <div class="space-y-6">
+                        <div class="form-section">
+                            <h4 class="sub-heading">Ingredients</h4>
+                            <!-- Input for single ingredients with a '+' icon button -->
+                            <div class="flex space-x-2 items-center w-full">
+                                <label for="ingredients-input" class="sr-only">Ingredients</label>
+                                <input type="text" id="ingredients-input" class="modern-single-line-input flex-grow"
+                                    placeholder="Add ingredients one at a time">
+                                <button type="button" id="add-ingredient-btn" class="modern-icon-btn">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- The container for the ingredient cards -->
+                            <div id="ingredient-list" class="mt-4 space-y-2">
+                                <!-- Ingredient cards will be dynamically added here -->
+                            </div>
+                            <!-- Error message for when the ingredient list is empty -->
+                            <p id="ingredient-error" class="text-red-700 mt-2 hidden">Please add at least one
+                                ingredient.</p>
+                        </div>
+
+                        <!-- New one-line input boxes for cuisine, dietary restrictions, and other requests -->
+                        <div>
+                            <h4 class="sub-heading">Cuisine</h4>
+                            <label for="cuisine-input" class="sr-only">Cuisine</label>
+                            <input type="text" id="cuisine-input" class="modern-single-line-input"
+                                placeholder="Your preferred cuisine">
+                        </div>
+                        <div>
+                            <h4 class="sub-heading">Dietary Restrictions</h4>
+                            <label for="diet-input" class="sr-only">Dietary Restrictions</label>
+                            <input type="text" id="diet-input" class="modern-single-line-input"
+                                placeholder="Your dietary restrictions or allergies">
+                        </div>
+                        <div>
+                            <h4 class="sub-heading">Other Requests</h4>
+                            <label for="requests-input" class="sr-only">Other Requests</label>
+                            <input type="text" id="requests-input" class="modern-single-line-input"
+                                placeholder="Any other requests you might have">
+                        </div>
+                    </div>
+                    <!-- The button wrapper div now has a w-full class to ensure it spans the full width -->
+                    <div class="text-center mt-8 w-full">
+                        <button type="submit" class="modern-btn-primary">
+                            Generate Recipe
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- This is the container for the generated recipe output, it remains hidden by default -->
+            {% if name %}
+            <div id="recipe-output" class="modern-recipe-output mt-8 max-w-xl">
+                <div class="recipe-card-container">
+                    <!-- Recipe Title -->
+                    <h3 class="recipe-title text-center">{{ name }}</h3>
+
+                    <!-- Recipe Details: Prep Time, Cook Time, Total Time, and Yield -->
+                    <div class="recipe-details-flex">
+                        <div class="detail-item-flex">
+                            <span class="detail-label">Prep Time:</span>
+                            <span class="detail-value">{{ prep_time }}</span>
+                        </div>
+                        <div class="detail-item-flex">
+                            <span class="detail-label">Cook Time:</span>
+                            <span class="detail-value">{{ cook_time }}</span>
+                        </div>
+                        <div class="detail-item-flex">
+                            <span class="detail-label">Total Time:</span>
+                            <span class="detail-value">{{ total_time }}</span>
+                        </div>
+                        <div class="detail-item-flex">
+                            <span class="detail-label">Yield:</span>
+                            <span class="detail-value">{{ yields }}</span>
+                        </div>
+                    </div>
+
+                    <hr class="card-divider-updated">
+
+                    <!-- Recipe Description -->
+                    <p class="recipe-description">{{ description }}</p>
+
+                    <hr class="card-divider-updated">
+
+                    <!-- Ingredients Section -->
+                    <div class="ingredients-section">
+                        <h4 class="section-subheading">Ingredients</h4>
+                        <ul class="ingredient-list text-left">
+                            {% for ingredient in ingredients %}
+                            <li class="ingredient-item">{{ ingredient }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <hr class="card-divider-updated">
+
+                    <!-- Instructions Section -->
+                    <div class="instructions-section">
+                        <h4 class="section-subheading">Instructions</h4>
+                        <ol class="instruction-list text-left">
+                            {% for step in recipe_steps %}
+                            <li class="instruction-step">{{ step }}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 IngrediGenie. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for scroll animations and form functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Scroll Animation Functionality
+            const sectionsToAnimate = document.querySelectorAll('.page-wrapper .content-section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sectionsToAnimate.forEach(section => {
+                section.classList.add('fade-in-up');
+                observer.observe(section);
+            });
+
+            // Get form elements
+            const ingredientInput = document.getElementById('ingredients-input');
+            const addIngredientBtn = document.getElementById('add-ingredient-btn');
+            const ingredientList = document.getElementById('ingredient-list');
+            const recipeForm = document.getElementById('recipe-form');
+            const recipeOutputDiv = document.getElementById('recipe-output');
+
+            const cuisineInput = document.getElementById('cuisine-input');
+            const dietInput = document.getElementById('diet-input');
+            const requestsInput = document.getElementById('requests-input');
+            const ingredientError = document.getElementById('ingredient-error');
+
+            // Function to add an ingredient to the list as a card
+            function addIngredient() {
+                const ingredient = ingredientInput.value.trim();
+                if (ingredient) {
+                    // Create a new div to act as the ingredient card
+                    const ingredientCard = document.createElement('div');
+                    ingredientCard.className = 'ingredient-card'; // Use the new styling class
+                    ingredientCard.innerHTML = `
+                        <span>${ingredient}</span>
+                        <button type="button" class="remove-btn">
+                            <i class="fas fa-times-circle"></i>
+                        </button>
+                    `;
+                    ingredientList.appendChild(ingredientCard);
+                    ingredientInput.value = '';
+
+                    // Hide the error message when an ingredient is added
+                    ingredientError.classList.add('hidden');
+
+                    // Add a click listener to the new remove button
+                    ingredientCard.querySelector('.remove-btn').addEventListener('click', () => {
+                        ingredientCard.remove();
+                        // Re-check if the list is empty after removal
+                        if (ingredientList.children.length === 0) {
+                            ingredientError.classList.remove('hidden');
+                        }
+                    });
+                }
+            }
+
+            // Event listeners
+            addIngredientBtn.addEventListener('click', addIngredient);
+            ingredientInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addIngredient();
+                }
+            });
+
+            recipeForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get all ingredients from the list
+                const ingredients = Array.from(ingredientList.querySelectorAll('.ingredient-card span')).map(item => item.textContent);
+
+                // Custom validation: check if the ingredient list is empty
+                if (ingredients.length === 0) {
+                    ingredientError.classList.remove('hidden');
+                    return;
+                }
+
+                // If the list is not empty, clear any potential error and proceed
+                ingredientError.classList.add('hidden');
+
+                const cuisine = cuisineInput.value.trim() || 'Any';
+                const diet = dietInput.value.trim() || 'None';
+                const requests = requestsInput.value.trim() || 'None';
+
+                fetch('/receive-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ ingredients, cuisine, diet, requests })
+                })
+                    .then(response => {
+                        if (response.redirected) {
+                            window.location.href = response.url;
+                        }
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>
